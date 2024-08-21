@@ -1,86 +1,94 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Get started with Opslane in minutes'
 ---
 
-## Setup your development
+## Setup Opslane
 
-Learn how to update your docs locally and and deploy them to the public.
+Follow these steps to set up Opslane and start improving your on-call experience.
 
-### Edit and preview
+### Prerequisites
+
+Before you begin, make sure you have:
+
+- Docker installed on your system
+- A Slack workspace
+- A Datadog account
+- OpenAI API key (for AI-powered features)
+
+### Installation
 
 <AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
+  <Accordion icon="github" title="Clone the repository">
+    Open your terminal and run the following command to clone the Opslane repository:
+
+    ```bash
+git clone https://github.com/opslane/opslane.git
+cd opslane
+```
+</Accordion>
+
+  <Accordion icon="gear" title="Configure environment variables">
+    1. Copy the example environment file:
+
+    ```bash
+cp .env.example .env
+```
+
+    2. Open the `.env` file in your preferred text editor.
+    3. Edit the file to add your Slack, Datadog, and OpenAI API keys.
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
+
+  <Accordion icon="docker" title="Build and run with Docker">
+    Build and run the Opslane Docker container:
+
+    ```bash
+docker-compose up --build
+```
+
+ This command will start Opslane and make it ready for use.
   </Accordion>
 </AccordionGroup>
 
-### Deploy your changes
+## Configure Integrations
 
 <AccordionGroup>
+  <Accordion icon="slack" title="Set up Slack integration">
+    1. Add the Opslane bot to the Slack channel where you receive alerts.
+    2. Ensure the bot has necessary permissions to read and post messages.
+  </Accordion>
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
-
+  <Accordion icon="dog" title="Configure Datadog">
+    1. Log in to your Datadog account.
+    2. Navigate to the Integrations section.
+    3. Set up a new webhook integration pointing to Opslane's webhook endpoint.
+    4. Configure your alerts to use this new webhook.
+  </Accordion>
 </AccordionGroup>
 
-## Update your docs
+## Start Using Opslane
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+Once you've completed the setup and configuration:
+
+1. Opslane will automatically start analyzing incoming alerts from Datadog.
+2. Check your configured Slack channel to see Opslane's insights and recommendations.
+3. Interact with Opslane in Slack to get more information or take actions on alerts.
+
+## Next Steps
 
 <CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+  <Card
+    title="Explore Features"
+    icon="stars"
+    href="/introduction"
+  >
+    Learn about Opslane's key features and how to use them effectively.
+  </Card>
+  <Card
+    title="Join Community"
+    icon="users"
+    href="https://join.slack.com/t/opslanecommunity/shared_invite/zt-2ncr7a1tx-8YAdUoVHJX0qgCF31PATuA"
+  >
+    Connect with other Opslane users and get support.
+  </Card>
 </CardGroup>

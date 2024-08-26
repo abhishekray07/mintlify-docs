@@ -1,0 +1,54 @@
+---
+title: 'Datadog Setup'
+description: 'Configure Datadog integration with Opslane'
+---
+
+## Datadog Integration Overview
+
+The Datadog integration allows Opslane to query Datadog for alerts. This guide will walk you through the setup process.
+
+## Authentication
+
+To connect Opslane with Datadog, you'll need two key authentication parameters:
+
+1. API Key
+2. App Key
+
+### Obtaining API Key
+
+1. Log in to your Datadog account.
+2. Hover over your organization link at the bottom of the sidebar menu.
+
+<img
+  src="/images/datadog-organization.png"
+  alt="Opslane Datadog Installation"
+/>
+
+3. Click on the "API" tab.
+4. Generate a new API Key.
+
+<img
+  src="/images/datadog-new-api-key.png"
+  alt="Opslane Datadog Installation"
+/>
+
+### Obtaining App Key
+
+1. While on the API key screen, click on "Application Keys" menu under the "Access" group.
+
+<img
+  src="/images/datadog-app-key.png"
+  alt="Opslane Datadog Installation"
+/>
+
+2. Generate a new App Key or use an existing one.
+
+## Configuring Opslane
+
+1. Open your Opslane configuration file or environment variables.
+2. Add the following entries to the `.env` file:
+
+```bash
+DATADOG_API_KEY=your_api_key_here
+DATADOG_APP_KEY=your_app_key_here
+```

@@ -36,7 +36,9 @@
       "group": "Welcome to Opslane",
       "pages": [
         "introduction",
-        "quickstart"
+        "quickstart",
+        "slack-bot-setup",
+        "datadog-setup"
       ]
     }
   ],

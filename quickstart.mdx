@@ -15,6 +15,7 @@ Before you begin, make sure you have:
 - A Slack workspace
 - A Datadog account
 - OpenAI API key (for AI-powered features)
+- Ngrok account (for external URL setup)
 
 ### Installation
 
@@ -23,30 +24,48 @@ Before you begin, make sure you have:
     Open your terminal and run the following command to clone the Opslane repository:
 
     ```bash
-git clone https://github.com/opslane/opslane.git
-cd opslane
-```
-</Accordion>
+    git clone https://github.com/opslane/opslane.git
+    cd opslane
+    ```
+  </Accordion>
+
+  <Accordion icon="globe" title="Set up external URL with Ngrok">
+    Opslane requires an external URL accessible from the internet for features like Slack integration and Datadog webhooks. We'll use Ngrok to create this URL.
+
+    1. Sign up for a free Ngrok account at [https://ngrok.com](https://ngrok.com) if you haven't already.
+    2. Install Ngrok following their [installation guide](https://ngrok.com/download).
+    3. Authenticate Ngrok with your account token:
+    ```bash
+    ngrok authtoken YOUR_NGROK_AUTH_TOKEN
+    ```
+    4. Start your ngrok tunnel
+
+    The ngrok tunnel should point to port 8001 (where the API server will run):
+
+    ```bash
+    ngrok http --subdomain=xxx --host-header=rewrite 8001 --region us
+    ```
+  </Accordion>
 
   <Accordion icon="gear" title="Configure environment variables">
     1. Copy the example environment file:
 
     ```bash
-cp .env.example .env
-```
+    cp .env.example .env
+    ```
 
-    2. Open the `.env` file in your preferred text editor.
-    3. Edit the file to add your Slack, Datadog, and OpenAI API keys.
+    2. Leave the dummy values for now. We will come back and update them.
   </Accordion>
 
   <Accordion icon="docker" title="Build and run with Docker">
     Build and run the Opslane Docker container:
 
     ```bash
-docker-compose up --build
-```
+    docker-compose up --build
+    ```
 
- This command will start Opslane and make it ready for use.
+    This command will start Opslane. Before we can get the alert classification to work,
+    we need to get the Slack and Datadog integrations to work.
   </Accordion>
 </AccordionGroup>
 
@@ -54,41 +73,26 @@ docker-compose up --build
 
 <AccordionGroup>
   <Accordion icon="slack" title="Set up Slack integration">
-    1. Add the Opslane bot to the Slack channel where you receive alerts.
-    2. Ensure the bot has necessary permissions to read and post messages.
+    For detailed instructions on setting up the Opslane Slack bot, including adding it to your channels and configuring permissions, please refer to our [Slack Bot Setup Guide](/slack-bot-setup).
   </Accordion>
 
   <Accordion icon="dog" title="Configure Datadog">
-    1. Log in to your Datadog account.
-    2. Navigate to the Integrations section.
-    3. Set up a new webhook integration pointing to Opslane's webhook endpoint.
-    4. Configure your alerts to use this new webhook.
+    For detailed instructions on setting up the Datadog integration, please refer to our [Datadog Setup Guide](/datadog-setup).
   </Accordion>
 </AccordionGroup>
 
 ## Start Using Opslane
 
-Once you've completed the setup and configuration:
+Before using Opslane, e want to index the slack channels that have the alert history as well as annotate 25 alerts to generate a model.
 
-1. Opslane will automatically start analyzing incoming alerts from Datadog.
-2. Check your configured Slack channel to see Opslane's insights and recommendations.
-3. Interact with Opslane in Slack to get more information or take actions on alerts.
+To do these run the following commands:
 
-## Next Steps
+1. `docker ps` to find out the id of the `app` container.
 
-<CardGroup>
-  <Card
-    title="Explore Features"
-    icon="stars"
-    href="/introduction"
-  >
-    Learn about Opslane's key features and how to use them effectively.
-  </Card>
-  <Card
-    title="Join Community"
-    icon="users"
-    href="https://join.slack.com/t/opslanecommunity/shared_invite/zt-2ncr7a1tx-8YAdUoVHJX0qgCF31PATuA"
-  >
-    Connect with other Opslane users and get support.
-  </Card>
-</CardGroup>
+2. `docker exec -it <container_id> /bin/bash`
+
+3. Index Slack content: `python -m app.scripts.seed_data`
+
+4. Classify Datadog alerts: `python -m app.ml.training.train_alert_classifier --num-alerts 20`
+
+5. Opslane is ready to use. Any future datadog alerts will be annotated!

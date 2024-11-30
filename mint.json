@@ -37,6 +37,7 @@
       "pages": [
         "introduction",
         "quickstart",
+        "account-setup",
         "slack-bot-setup",
         "datadog-setup",
         "pagerduty-setup"

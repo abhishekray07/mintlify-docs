@@ -38,7 +38,8 @@
         "introduction",
         "quickstart",
         "slack-bot-setup",
-        "datadog-setup"
+        "datadog-setup",
+        "pagerduty-setup"
       ]
     }
   ],

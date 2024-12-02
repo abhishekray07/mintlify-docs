@@ -5,120 +5,13 @@ description: 'Set up the Opslane Slack bot to automatically analyze and respond 
 
 ## Opslane Slack Bot Introduction
 
-Opslane connects to your Slack workspace and listens for incoming alerts. When it detects an alert, it will:
+This guide will walk you through how to install the Opslane Bot in your Slack installation:
 
-- Analyze the alert using AI
-- Provide contextual information
-- Suggest potential actions
-- Respond in the message thread with insights
-
-## Setting up
-
-### Authorization
-
-<Note>
-  You must be an admin of the Slack workspace to set up the Opslane Slack bot.
-</Note>
-
-1. Go to [https://api.slack.com/apps](https://api.slack.com/apps) and sign in.
-2. Click the **Create New App** button in the top right.
-3. Select **From an app manifest** option.
-
-
-<img
-  src="/images/slack-app-from-manifest.png"
-  alt="Opslane Slack Bot Installation"
-/>
-
-
-4. Choose your workspace from the dropdown and click **Next**.
-5. Select the "JSON" tab and paste the following manifest:
-
-Replace `xxx.ngrok.io` with your external facing URL.
-
-```json
-{
-    "display_information": {
-        "name": "Opslane"
-    },
-    "features": {
-        "bot_user": {
-            "display_name": "Opslane",
-            "always_online": false
-        },
-        "slash_commands": [
-            {
-                "command": "/opslane",
-                "url": "https://xxx.ngrok.io/slack/events",
-                "description": "Opslane slash command",
-                "usage_hint": "[query]",
-                "should_escape": false
-            }
-        ]
-    },
-    "oauth_config": {
-        "scopes": {
-            "bot": [
-                "app_mentions:read",
-                "channels:history",
-                "channels:read",
-                "chat:write",
-                "commands",
-                "files:write",
-                "groups:read",
-                "mpim:read",
-                "users:read"
-            ]
-        }
-    },
-    "settings": {
-        "event_subscriptions": {
-            "request_url": "https://xxx.ngrok.io/slack/events",
-            "bot_events": [
-                "member_joined_channel",
-                "message.channels"
-            ]
-        },
-        "interactivity": {
-            "is_enabled": true,
-            "request_url": "https://xxx.ngrok.io/slack/events"
-        },
-        "org_deploy_enabled": false,
-        "socket_mode_enabled": false,
-        "token_rotation_enabled": false
-    }
-}
-```
-
-
-6. Click **Next**, then **Create**.
-7. Under the **Basic Information**, click on `Show` for the Signing Secret and save it in your `.env` file under `SLACK_SIGNING_SECRET`.
-
-<img
-  src="/images/slack-signing-secret.png"
-  alt="Opslane Slack Bot Installation"
-/>
-
-8. Navigate to **OAuth & Permissions** under the **Features** section.
-9. Click **Install to Workspace** and allow the app.
-10. Copy the **Bot User OAuth Token** and save it in `.env` and assign to `SLACK_BOT_TOKEN`.
-
-<img
-  src="/images/slack-bot-token.png"
-  alt="Opslane Slack Bot Installation"
-/>
-
-
-### Configuring Opslane
-
-1. Update the follow env vars in `.env`:
-
-```bash
-SLACK_WORKSPACE=yourworkspace
-SLACK_CHANNELS=alerts,dd-alerts
-```
-
-`SLACK_WORKSPACE` refers to the workspace name of your Slack installation. `SLACK_CHANNELS` refers to the channels
-where you receive your alerts.
-
-2. Add the Opslane bot to the channel where you receive your alerts by inviting (@opslane) to those channels.
+<div className="relative" style={{ paddingBottom: "75.10431154381085%" }}>
+ <iframe
+   src="https://www.loom.com/embed/4995983a61fd4804afea802d6c99bb5e?sid=1d5e5806-5350-4e04-8058-431b6d07e3f2"
+   frameBorder="0"
+   allowFullScreen
+   className="absolute top-0 left-0 w-full h-full"
+ />
+</div>

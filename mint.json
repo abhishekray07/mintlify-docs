@@ -40,7 +40,9 @@
         "account-setup",
         "slack-bot-setup",
         "datadog-setup",
-        "pagerduty-setup"
+        "pagerduty-setup",
+        "opsgenie-setup",
+        "github-setup"
       ]
     }
   ],
